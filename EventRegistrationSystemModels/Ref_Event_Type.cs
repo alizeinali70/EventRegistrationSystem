@@ -9,6 +9,7 @@ namespace EventRegistrationSystemModels
     {
         [Key]
         public int event_type_code { get; set; }
-        public string event_type_description { get; set; }
+        public string event_type_description { get; set; }        
+        public IEnumerable<Events> events { get; set; }
     }
 }

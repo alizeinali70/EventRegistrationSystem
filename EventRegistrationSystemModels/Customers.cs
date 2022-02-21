@@ -12,8 +12,10 @@ namespace EventRegistrationSystemModels
         public double customer_id { get; set; }
         [ForeignKey("Permissions")]
         public Permissions customer_permission_id { get; set; }
+        public Permissions perrmission { get; set; }
         public string customer_name { get; set; }
         public string customer_phone { get; set; }
         public string customer_email { get; set; }
+        public IEnumerable<Events> events { get; set; }
     }
 }
