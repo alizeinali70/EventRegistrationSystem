@@ -6,11 +6,11 @@ using System.Text;
 
 namespace EventRegistrationSystemModels
 {
-    [Table("Permissions")]
+    [Table("T_Permissions")]
     public class Permissions
     {
         [Key]
-        public int permission_id { get; set; }
+        public double permission_id { get; set; }
         public string permission_description { get; set; }
         
     }

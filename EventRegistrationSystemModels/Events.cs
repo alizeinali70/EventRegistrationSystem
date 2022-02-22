@@ -6,13 +6,13 @@ using System.Text;
 
 namespace EventRegistrationSystemModels
 {
-    [Table("Events")]
+    [Table("T_Events")]
     public class Events
     {
         [Key]
-        public int event_id { get; set; }
+        public double event_id { get; set; }
         [ForeignKey("Ref_Event_Type")]
-        public Ref_Event_Type event_type_code { get; set; }
+        public double event_type_code { get; set; }
         public Ref_Event_Type event_type { get; set; }
         public string event_name { get; set; }
         public DateTime event_start_date { get; set; }

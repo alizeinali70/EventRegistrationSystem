@@ -13,5 +13,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EventRegistrationSystemModels\EventRegistrationSystemModels.csproj" />
+  </ItemGroup>
+
 
 </Project>

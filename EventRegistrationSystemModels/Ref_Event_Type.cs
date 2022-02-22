@@ -6,11 +6,11 @@ using System.Text;
 
 namespace EventRegistrationSystemModels
 {
-    [Table("Ref_Event_Type")]
+    [Table("T_Ref_Event_Type")]
     public class Ref_Event_Type
     {
         [Key]
-        public int event_type_code { get; set; }
+        public double event_type_code { get; set; }
         public string event_type_description { get; set; }        
         
     }

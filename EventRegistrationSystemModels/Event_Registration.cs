@@ -6,15 +6,15 @@ using System.Text;
 
 namespace EventRegistrationSystemModels
 {
-    [Table("Event_Registration")]
+    [Table("T_Event_Registration")]
     public class Event_Registration
     {
         [Key]
         public double booking_id { get; set; }
         [ForeignKey("Customers")]
-        public Customers customer_id { get; set; }
+        public double customer_id { get; set; }
         [ForeignKey("Events")]
-        public Events event_id { get; set; }
+        public double event_id { get; set; }
         public DateTime event_datetime { get; set; }
         public int booking_seat_count { get; set; }
        
