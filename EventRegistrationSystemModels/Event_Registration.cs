@@ -6,6 +6,7 @@ using System.Text;
 
 namespace EventRegistrationSystemModels
 {
+    [Table("Event_Registration")]
     public class Event_Registration
     {
         [Key]
@@ -16,7 +17,6 @@ namespace EventRegistrationSystemModels
         public Events event_id { get; set; }
         public DateTime event_datetime { get; set; }
         public int booking_seat_count { get; set; }
-        public IEnumerable<Customers> customers { get; set; }
-        public IEnumerable<Events> events { get; set; }
+       
     }
 }

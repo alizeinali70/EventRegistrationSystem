@@ -6,6 +6,7 @@ using System.Text;
 
 namespace EventRegistrationSystemModels
 {
+    [Table("Events")]
     public class Events
     {
         [Key]
@@ -16,7 +17,7 @@ namespace EventRegistrationSystemModels
         public string event_name { get; set; }
         public DateTime event_start_date { get; set; }
         public DateTime event_end_date { get; set; }
-        public IEnumerable<Customers> customers { get; set; }
+        
 
     }
 }
