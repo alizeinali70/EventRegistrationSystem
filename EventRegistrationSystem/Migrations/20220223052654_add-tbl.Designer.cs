@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventRegistrationSystem.Migrations
 {
     [DbContext(typeof(CompanyContext))]
-    [Migration("20220222070918_create_tbl")]
-    partial class create_tbl
+    [Migration("20220223052654_add-tbl")]
+    partial class addtbl
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,8 +23,10 @@ namespace EventRegistrationSystem.Migrations
 
             modelBuilder.Entity("EventRegistrationSystemModels.Customers", b =>
                 {
-                    b.Property<double>("customer_id")
-                        .HasColumnType("float");
+                    b.Property<int>("customer_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("customer_email")
                         .HasColumnType("nvarchar(max)");
@@ -32,38 +34,35 @@ namespace EventRegistrationSystem.Migrations
                     b.Property<string>("customer_name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("customer_permission_id")
-                        .HasColumnType("float");
+                    b.Property<int>("customer_permission_id")
+                        .HasColumnType("int");
 
                     b.Property<string>("customer_phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("perrmissionpermission_id")
-                        .HasColumnType("float");
-
                     b.HasKey("customer_id");
-
-                    b.HasIndex("perrmissionpermission_id");
 
                     b.ToTable("T_Customers");
                 });
 
             modelBuilder.Entity("EventRegistrationSystemModels.Event_Registration", b =>
                 {
-                    b.Property<double>("booking_id")
-                        .HasColumnType("float");
+                    b.Property<int>("booking_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("booking_seat_count")
                         .HasColumnType("int");
 
-                    b.Property<double>("customer_id")
-                        .HasColumnType("float");
+                    b.Property<int>("customer_id")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("event_datetime")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("event_id")
-                        .HasColumnType("float");
+                    b.Property<int>("event_id")
+                        .HasColumnType("int");
 
                     b.HasKey("booking_id");
 
@@ -72,8 +71,10 @@ namespace EventRegistrationSystem.Migrations
 
             modelBuilder.Entity("EventRegistrationSystemModels.Events", b =>
                 {
-                    b.Property<double>("event_id")
-                        .HasColumnType("float");
+                    b.Property<int>("event_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("event_end_date")
                         .HasColumnType("datetime2");
@@ -84,23 +85,20 @@ namespace EventRegistrationSystem.Migrations
                     b.Property<DateTime>("event_start_date")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("event_type_code")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("event_type_code1")
-                        .HasColumnType("float");
+                    b.Property<int>("event_type_code")
+                        .HasColumnType("int");
 
                     b.HasKey("event_id");
-
-                    b.HasIndex("event_type_code1");
 
                     b.ToTable("T_Events");
                 });
 
             modelBuilder.Entity("EventRegistrationSystemModels.Permissions", b =>
                 {
-                    b.Property<double>("permission_id")
-                        .HasColumnType("float");
+                    b.Property<int>("permission_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("permission_description")
                         .HasColumnType("nvarchar(max)");
@@ -112,8 +110,10 @@ namespace EventRegistrationSystem.Migrations
 
             modelBuilder.Entity("EventRegistrationSystemModels.Ref_Event_Type", b =>
                 {
-                    b.Property<double>("event_type_code")
-                        .HasColumnType("float");
+                    b.Property<int>("event_type_code")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("event_type_description")
                         .HasColumnType("nvarchar(max)");
@@ -121,24 +121,6 @@ namespace EventRegistrationSystem.Migrations
                     b.HasKey("event_type_code");
 
                     b.ToTable("T_Ref_Event_Type");
-                });
-
-            modelBuilder.Entity("EventRegistrationSystemModels.Customers", b =>
-                {
-                    b.HasOne("EventRegistrationSystemModels.Permissions", "perrmission")
-                        .WithMany()
-                        .HasForeignKey("perrmissionpermission_id");
-
-                    b.Navigation("perrmission");
-                });
-
-            modelBuilder.Entity("EventRegistrationSystemModels.Events", b =>
-                {
-                    b.HasOne("EventRegistrationSystemModels.Ref_Event_Type", "event_type")
-                        .WithMany()
-                        .HasForeignKey("event_type_code1");
-
-                    b.Navigation("event_type");
                 });
 #pragma warning restore 612, 618
         }

@@ -10,7 +10,8 @@ namespace EventRegistrationSystemModels
     public class Ref_Event_Type
     {
         [Key]
-        public double event_type_code { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int event_type_code { get; set; }
         public string event_type_description { get; set; }        
         
     }

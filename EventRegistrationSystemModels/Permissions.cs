@@ -10,7 +10,8 @@ namespace EventRegistrationSystemModels
     public class Permissions
     {
         [Key]
-        public double permission_id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int permission_id { get; set; }
         public string permission_description { get; set; }
         
     }
