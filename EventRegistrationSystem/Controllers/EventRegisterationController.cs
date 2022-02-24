@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace EventRegistrationSystem.Controllers
 {
+    
     public class EventRegisterationController : Controller
     {
         private CompanyContext _companyContext;
@@ -35,13 +36,14 @@ namespace EventRegistrationSystem.Controllers
             }
 
         }
-        [HttpPost]
-        [Route("api/EventDetails")]        
-        public JsonResult EventDetails(int id)
+      
+        [HttpPost]        
+        [Route("api/EventDetails")]
+        [Consumes("application/x-www-form-urlencoded")]
+        public ActionResult EventDetails(int id)
         {
             try
-            {
-                
+            {                
                var result = _companyContext.events.Where(x => x.event_id == id);
                 return Json(result);
             }
