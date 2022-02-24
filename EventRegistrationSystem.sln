@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventRegistrationSystem", "EventRegistrationSystem\EventRegistrationSystem.csproj", "{11B8E44D-F96B-4998-93CB-66FA1C27099A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventRegistrationSystem", "EventRegistrationSystem\EventRegistrationSystem.csproj", "{11B8E44D-F96B-4998-93CB-66FA1C27099A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventRegistrationSystemModels", "EventRegistrationSystemModels\EventRegistrationSystemModels.csproj", "{66CC19C1-2869-4A3F-A5E1-ABA6058B9BCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventRegistrationSystemModels", "EventRegistrationSystemModels\EventRegistrationSystemModels.csproj", "{66CC19C1-2869-4A3F-A5E1-ABA6058B9BCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

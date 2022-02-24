@@ -11,7 +11,7 @@
 
         }
 
-        public DbSet<Customers> customers { get; set; }
+      
         public DbSet<Permissions> permissions { get; set; }
         public DbSet<Ref_Event_Type> ref_Event_Types { get; set; }
         public DbSet<Events> events { get; set; }

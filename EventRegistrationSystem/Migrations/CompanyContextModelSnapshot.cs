@@ -19,30 +19,6 @@ namespace EventRegistrationSystem.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("EventRegistrationSystemModels.Customers", b =>
-                {
-                    b.Property<int>("customer_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("customer_email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("customer_name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("customer_permission_id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("customer_phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("customer_id");
-
-                    b.ToTable("T_Customers");
-                });
-
             modelBuilder.Entity("EventRegistrationSystemModels.Event_Registration", b =>
                 {
                     b.Property<int>("booking_id")
@@ -50,19 +26,30 @@ namespace EventRegistrationSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("Events")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Permissions")
+                        .HasColumnType("int");
+
                     b.Property<int>("booking_seat_count")
                         .HasColumnType("int");
 
-                    b.Property<int>("customer_id")
-                        .HasColumnType("int");
+                    b.Property<string>("customer_email_phonenumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("event_datetime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("event_id")
-                        .HasColumnType("int");
+                    b.Property<string>("identificationd_id")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("booking_id");
+
+                    b.HasIndex("Events");
+
+                    b.HasIndex("Permissions");
 
                     b.ToTable("T_Event_Registration");
                 });
@@ -74,6 +61,9 @@ namespace EventRegistrationSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("Ref_Event_Type")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("event_end_date")
                         .HasColumnType("datetime2");
 
@@ -83,10 +73,9 @@ namespace EventRegistrationSystem.Migrations
                     b.Property<DateTime>("event_start_date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("event_type_code")
-                        .HasColumnType("int");
-
                     b.HasKey("event_id");
+
+                    b.HasIndex("Ref_Event_Type");
 
                     b.ToTable("T_Events");
                 });
@@ -119,6 +108,30 @@ namespace EventRegistrationSystem.Migrations
                     b.HasKey("event_type_code");
 
                     b.ToTable("T_Ref_Event_Type");
+                });
+
+            modelBuilder.Entity("EventRegistrationSystemModels.Event_Registration", b =>
+                {
+                    b.HasOne("EventRegistrationSystemModels.Events", "event_id")
+                        .WithMany()
+                        .HasForeignKey("Events");
+
+                    b.HasOne("EventRegistrationSystemModels.Permissions", "permission_id")
+                        .WithMany()
+                        .HasForeignKey("Permissions");
+
+                    b.Navigation("event_id");
+
+                    b.Navigation("permission_id");
+                });
+
+            modelBuilder.Entity("EventRegistrationSystemModels.Events", b =>
+                {
+                    b.HasOne("EventRegistrationSystemModels.Ref_Event_Type", "event_type_code")
+                        .WithMany()
+                        .HasForeignKey("Ref_Event_Type");
+
+                    b.Navigation("event_type_code");
                 });
 #pragma warning restore 612, 618
         }
