@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventRegistrationSystem.Migrations
 {
     [DbContext(typeof(CompanyContext))]
-    [Migration("20220224180704_cret_tbl")]
-    partial class cret_tbl
+    [Migration("20220224204719_cret-tbl")]
+    partial class crettbl
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,12 +28,6 @@ namespace EventRegistrationSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("Events")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Permissions")
-                        .HasColumnType("int");
-
                     b.Property<int>("booking_seat_count")
                         .HasColumnType("int");
 
@@ -44,14 +38,20 @@ namespace EventRegistrationSystem.Migrations
                     b.Property<DateTime>("event_datetime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("event_id")
+                        .HasColumnType("int");
+
                     b.Property<string>("identificationd_id")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("permission_id")
+                        .HasColumnType("int");
+
                     b.HasKey("booking_id");
 
-                    b.HasIndex("Events");
+                    b.HasIndex("event_id");
 
-                    b.HasIndex("Permissions");
+                    b.HasIndex("permission_id");
 
                     b.ToTable("T_Event_Registration");
                 });
@@ -114,17 +114,21 @@ namespace EventRegistrationSystem.Migrations
 
             modelBuilder.Entity("EventRegistrationSystemModels.Event_Registration", b =>
                 {
-                    b.HasOne("EventRegistrationSystemModels.Events", "event_id")
+                    b.HasOne("EventRegistrationSystemModels.Events", "events")
                         .WithMany()
-                        .HasForeignKey("Events");
+                        .HasForeignKey("event_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("EventRegistrationSystemModels.Permissions", "permission_id")
+                    b.HasOne("EventRegistrationSystemModels.Permissions", "permission")
                         .WithMany()
-                        .HasForeignKey("Permissions");
+                        .HasForeignKey("permission_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("event_id");
+                    b.Navigation("events");
 
-                    b.Navigation("permission_id");
+                    b.Navigation("permission");
                 });
 
             modelBuilder.Entity("EventRegistrationSystemModels.Events", b =>

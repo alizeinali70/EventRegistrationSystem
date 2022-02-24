@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EventRegistrationSystem.Migrations
 {
-    public partial class cret_tbl : Migration
+    public partial class crettbl : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,39 +61,39 @@ namespace EventRegistrationSystem.Migrations
                 {
                     booking_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Events = table.Column<int>(type: "int", nullable: true),
+                    event_id = table.Column<int>(type: "int", nullable: false),
                     event_datetime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     booking_seat_count = table.Column<int>(type: "int", nullable: false),
                     customer_email_phonenumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     identificationd_id = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Permissions = table.Column<int>(type: "int", nullable: true)
+                    permission_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_T_Event_Registration", x => x.booking_id);
                     table.ForeignKey(
-                        name: "FK_T_Event_Registration_T_Events_Events",
-                        column: x => x.Events,
+                        name: "FK_T_Event_Registration_T_Events_event_id",
+                        column: x => x.event_id,
                         principalTable: "T_Events",
                         principalColumn: "event_id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_T_Event_Registration_T_Permissions_Permissions",
-                        column: x => x.Permissions,
+                        name: "FK_T_Event_Registration_T_Permissions_permission_id",
+                        column: x => x.permission_id,
                         principalTable: "T_Permissions",
                         principalColumn: "permission_id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_T_Event_Registration_Events",
+                name: "IX_T_Event_Registration_event_id",
                 table: "T_Event_Registration",
-                column: "Events");
+                column: "event_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_T_Event_Registration_Permissions",
+                name: "IX_T_Event_Registration_permission_id",
                 table: "T_Event_Registration",
-                column: "Permissions");
+                column: "permission_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_T_Events_Ref_Event_Type",

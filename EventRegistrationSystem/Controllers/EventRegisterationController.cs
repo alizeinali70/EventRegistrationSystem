@@ -18,6 +18,27 @@ namespace EventRegistrationSystem.Controllers
         }
 
         [HttpGet]
+        [Route("api/ShowCurrentEvents")]
+        public List<string> ShowCurrentEvents()
+        {
+            try
+            {
+                var result = _companyContext.events.Where(y => y.event_start_date >= DateTime.Now).Select(x => x.event_name).ToList();
+                List<string> events = new List<string>();
+                foreach (var item in result)
+                {
+                    events.Add(item.ToString());
+                }
+                return events;
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+
+        }
+
+        [HttpGet]
         [Route("api/ShowAllEvents")]
         public List<string> ShowAllEvents()
         {
@@ -61,21 +82,19 @@ namespace EventRegistrationSystem.Controllers
         public JsonResult EventRegistration(Events events, Permissions permissions, string customer_email_phonenumber)
         {
             try
-            {
-                Events selectd_event = new Events();
-
+            {               
                 Event_Registration event_Registration = new Event_Registration();
-                event_Registration.event_id.event_id = events.event_id;
-                event_Registration.event_datetime = System.DateTime.Now;
+                event_Registration.event_id = events.event_id;
+                event_Registration.event_datetime = DateTime.Now;
                 event_Registration.booking_seat_count = Get_Book_Seat_Count(events) + 1;
-                event_Registration.permission_id.permission_id = permissions.permission_id;
+                event_Registration.permission_id = permissions.permission_id;
                 event_Registration.customer_email_phonenumber = customer_email_phonenumber;
                 event_Registration.identificationd_id = Create_identificationd_id();
 
                 _companyContext.event_Registrations.Add(event_Registration);
                 _companyContext.SaveChanges();
 
-                return null;
+                return new JsonResult(event_Registration.identificationd_id);
             }
             catch (System.Exception)
             {
@@ -86,7 +105,7 @@ namespace EventRegistrationSystem.Controllers
 
         public int Get_Book_Seat_Count(Events events)
         {
-            var last_count = _companyContext.event_Registrations.Where(x => x.event_id.event_id == events.event_id);
+            var last_count = _companyContext.event_Registrations.Where(x => x.events.event_id == events.event_id);
             int Seat_Count = 0;
             if (last_count != null)
             {
@@ -109,5 +128,11 @@ namespace EventRegistrationSystem.Controllers
             return new string(Enumerable.Repeat(chars, 5)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+        //public bool Is_Exist()
+        //public bool Date_Is_Valid()
+        //public bool Check_Permission()
+        //public JsonResult FilterResult(DateTime StartDate,DateTime EndDate)
+        //change name of DB/
     }
 }
