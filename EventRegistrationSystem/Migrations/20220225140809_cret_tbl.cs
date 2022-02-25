@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EventRegistrationSystem.Migrations
 {
-    public partial class crettbl : Migration
+    public partial class cret_tbl : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

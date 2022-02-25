@@ -129,23 +129,28 @@ namespace EventRegistrationSystem.Controllers
         {
             try
             {
-                if (!Is_Exist(customer_email_phonenumber))
+                if (ModelState.IsValid)
                 {
-                    Event_Registration event_Registration = new Event_Registration();
-                    event_Registration.event_id = events.event_id;
-                    event_Registration.event_datetime = DateTime.Now;
-                    event_Registration.booking_seat_count = Get_Book_Seat_Count(events) + 1;
-                    event_Registration.permission_id = permissions.permission_id;
-                    event_Registration.customer_email_phonenumber = customer_email_phonenumber;
-                    event_Registration.identificationd_id = Create_identificationd_id();
+                    if (!Is_Exist(customer_email_phonenumber))
+                    {
+                        Event_Registration event_Registration = new Event_Registration();
+                        event_Registration.event_id = events.event_id;
+                        event_Registration.event_datetime = DateTime.Now;
+                        event_Registration.booking_seat_count = Get_Book_Seat_Count(events) + 1;
+                        event_Registration.permission_id = permissions.permission_id;
+                        event_Registration.customer_email_phonenumber = customer_email_phonenumber;
+                        event_Registration.identificationd_id = Create_identificationd_id();
 
-                    _companyContext.event_Registrations.Add(event_Registration);
-                    _companyContext.SaveChanges();
+                        _companyContext.event_Registrations.Add(event_Registration);
+                        _companyContext.SaveChanges();
 
-                    return new JsonResult(event_Registration.identificationd_id);
+                        return new JsonResult(event_Registration.identificationd_id);
+                    }
+                    else
+                        return Json("You Have been Registered!!!");
                 }
                 else
-                    return Json("You Have been Registered!!!");
+                    return Json("Something is Wrong!!!");
             }
             catch (System.Exception)
             {

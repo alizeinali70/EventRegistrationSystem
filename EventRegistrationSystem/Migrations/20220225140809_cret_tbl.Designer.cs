@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventRegistrationSystem.Migrations
 {
     [DbContext(typeof(CompanyContext))]
-    [Migration("20220224204719_cret-tbl")]
-    partial class crettbl
+    [Migration("20220225140809_cret_tbl")]
+    partial class cret_tbl
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
